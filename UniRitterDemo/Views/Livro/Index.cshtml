@@ -1,0 +1,45 @@
+﻿@model UniRitterDemo.Models.LivroIndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<fieldset>
+    <legend>LivroIndexModel</legend>
+
+    <div class="display-label">Título</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">Fonte</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Fonte)
+    </div>
+
+    <div class="display-label">Publicação</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AnoPublicacao)
+    </div>
+
+    <div class="display-label">Editora</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Editora)
+    </div>
+
+    <div class="display-label">Autor</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AutorNome)
+    </div>
+
+    <div class="display-label">Gênero</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GeneroNome)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

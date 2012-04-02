@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ninject.Modules;
+using UniRitter.Demo.DomainModel;
 
 namespace UniRitter.Demo.BusinessLogic
 {
@@ -12,6 +13,9 @@ namespace UniRitter.Demo.BusinessLogic
         {
             this.Bind(typeof(IBusinessObject<>))
                 .To(typeof(BusinessObject<>));
+
+            this.Bind<ILivroBO>()
+                .To<LivroBO>();
         }
     }
 }

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
+using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace UniRitter.Demo.DomainModel
+namespace UniRitterDemo.Models
 {
-    [Table("Livro")]
-    public class Livro : IEntidade
+    public class LivroEditModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -23,14 +20,25 @@ namespace UniRitter.Demo.DomainModel
 
         public string Editora { get; set; }
 
-        public virtual Autor Autor { get; set; }
-
-        public virtual Genero Genero { get; set; }
-
-        [ForeignKey("Autor")]
         public int AutorId { get; set; }
 
-        [ForeignKey("Genero")]
         public int GeneroId { get; set; }
+    }
+
+    public class LivroIndexModel
+    {
+        public int Id { get; set; }
+
+        public string Nome { get; set; }
+
+        public string Fonte { get; set; }
+
+        public int AnoPublicacao { get; set; }
+
+        public string Editora { get; set; }
+
+        public string AutorNome { get; set; }
+
+        public string GeneroNome { get; set; }
     }
 }

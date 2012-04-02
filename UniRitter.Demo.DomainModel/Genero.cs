@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Linq.Mapping;
-
-namespace UniRitter.Demo.DomainModel
+﻿namespace UniRitter.Demo.DomainModel
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    [Table("Genero")]
     public class Genero : IEntidade
     {
+        [Key]
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string Nome { get; set; }
+
+        public virtual ICollection<Livro> Livros { get; set; }
     }
 }
