@@ -16,17 +16,40 @@ namespace UniRitterDemo.Controllers
 
         public IMapper<Autor, AutorModel> Mapper { get; private set; }
 
-        public IMapper<AutorModel, Autor> ModelMapper { get; private set; }
+        public IMapper<AutorModel, Autor> MapperModel { get; private set; }
 
         public AutorController(
             IBusinessObject<Autor> bo,
             IMapper<Autor, AutorModel> mapper,
-            IMapper<AutorModel, Autor> modelMapper)
+            IMapper<AutorModel, Autor> mapperModel)
         {
             BO = bo;
             Mapper = mapper;
-            ModelMapper = modelMapper;
+            MapperModel = mapperModel;
         }
+
+        // esse método serve para mostrar os dados do objeto que vai ser removido.
+        public ActionResult Delete(int id)
+        {
+            return MostrarEntidade(id);
+        }
+
+        // esse método remove de fato
+        [HttpPost]
+        public ActionResult Delete(AutorModel model)
+        {
+            // mapeando do model para a entidade real
+            var entidade = MapperModel.Map(model);
+            // passando a entidade para o BO remover
+            BO.Remover(entidade);
+            // redirecionando para o "index" desse controller
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Create()
+        {
+            return View(new AutorModel());
+        } 
 
         //
         // GET: /Autor/
@@ -38,24 +61,16 @@ namespace UniRitterDemo.Controllers
             return View(models);
         }
 
-        private ActionResult MostrarDetalhes(int id)
+        public ActionResult Details(int id)
+        {
+            return MostrarEntidade(id);
+        }
+
+        private ActionResult MostrarEntidade(int id)
         {
             var entidade = BO.BuscarPorId(id);
             var model = Mapper.Map(entidade);
             return View(model);
         }
-
-        public ActionResult Delete(int id)
-        {
-            return MostrarDetalhes(id);
-        }
-
-        [HttpPost]
-        public ActionResult Delete(AutorModel model)
-        {
-            var entidade = ModelMapper.Map(model);
-            BO.Remover(entidade);
-            return RedirectToAction("Index");
-        }        
     }
 }

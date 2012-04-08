@@ -15,19 +15,16 @@
             Nome
         </th>
         <th>
-            Fonte
-        </th>
-        <th>
-            AnoPublicacao
-        </th>
-        <th>
-            Editora
+            GeneroNome
         </th>
         <th>
             AutorNome
         </th>
         <th>
-            GeneroNome
+            Fonte
+        </th>
+        <th>
+            Editora
         </th>
         <th></th>
     </tr>
@@ -38,19 +35,16 @@
             @Html.DisplayFor(modelItem => item.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fonte)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnoPublicacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Editora)
+            @Html.DisplayFor(modelItem => item.GeneroNome)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AutorNome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GeneroNome)
+            @Html.DisplayFor(modelItem => item.Fonte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Editora)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
