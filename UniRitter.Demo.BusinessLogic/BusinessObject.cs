@@ -33,7 +33,7 @@ namespace UniRitter.Demo.BusinessLogic
         public virtual void Atualizar(TEntidade entidade)
         {
             Guard.That(() => entidade).IsNotNull();
-            throw new NotImplementedException();
+            Repo.Atualizar(entidade);
         }
 
         public virtual TEntidade BuscarPorId(int id)

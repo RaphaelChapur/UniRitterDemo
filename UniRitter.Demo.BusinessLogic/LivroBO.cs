@@ -1,9 +1,9 @@
 ﻿using System;
+using UniRitter.Demo.BusinessLogic;
+using UniRitter.Demo.DataAccessLogic;
+using UniRitter.Demo.DomainModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UniRitter.Demo.DomainModel;
-using UniRitter.Demo.DataAccessLogic;
 
 namespace UniRitter.Demo.BusinessLogic
 {
@@ -12,24 +12,26 @@ namespace UniRitter.Demo.BusinessLogic
         public LivroBO(IRepository<Livro> repo)
             : base(repo)
         {
+
+        }
+
+        public override Livro BuscarPorId(int id)
+        {
+           //var q = from Livro in Repo.Buscar("Autor", "Genero")
+           //         where livro.Id == id
+           //         select livro;
+
+           // return q.SingleOrDefault();
+            return null;
         }
 
         public override IEnumerable<Livro> BuscarTodos()
         {
             return Repo.Buscar("Autor", "Genero");
         }
-
-        public override Livro BuscarPorId(int id)
-        {
-            // buscando o livro com o Id determinado
-            var q = from livro in Repo.Buscar("Autor", "Genero")
-                    where livro.Id == id
-                    select livro;
-
-            // Single or default retorna a única entrada encontrada
-            // ou nulo se nada foi achado. Em caso de múltiplas entradas,
-            // lança uma exceção.
-            return q.SingleOrDefault();
-        }
     }
 }
+
+
+
+

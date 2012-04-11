@@ -14,25 +14,22 @@ namespace UniRitterDemo.Controllers
     {
         public IBusinessObject<Genero> BO { get; set; }
 
-        public IMapper<Genero, GeneroModel> Mapper { get; set; }
+        public IMappingRepository MappingRepo { get; set; }
 
-        // Construtor público do contoller de genero -- as duas dependências (mapper e BO)
-        // são passadas nos argumentos
-        public GeneroController(IBusinessObject<Genero> bo, IMapper<Genero, GeneroModel> mapper)
+        public GeneroController(IBusinessObject<Genero> bo, IMappingRepository mappingRepo)
         {
-            // guardando as dependências em propriedades, para usar depois
-            BO = bo;
-            Mapper = mapper;
+            this.BO = bo;
+            this.MappingRepo = mappingRepo;
         }
-        //
+    
         // GET: /Genero/
 
         public ActionResult Index()
         {
-            // buscar todas as entidades
-            // mapear as entidades para models
-            // passar os models para a view
-            return View();
+            var entidades = BO.BuscarTodos();
+            var mapper = MappingRepo.ResolveMapper<Genero, GeneroIndexModel>();
+            var models = mapper.MapMultiple(entidades);
+            return View(models);
         }
 
         //
@@ -74,7 +71,10 @@ namespace UniRitterDemo.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            var entidade = BO.BuscarPorId(id);
+            var mapper = MappingRepo.ResolveMapper<Genero, GeneroEditModel>();
+            var model = mapper.Map(entidade);
+            return View(model);
         }
 
         //

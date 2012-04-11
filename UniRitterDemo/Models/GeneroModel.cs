@@ -5,7 +5,14 @@ using System.Web;
 
 namespace UniRitterDemo.Models
 {
-    public class GeneroModel
+    public class GeneroIndexModel
+    {
+        public int Id { get; set; }
+
+        public string Nome { get; set; }
+    }
+
+    public class GeneroEditModel
     {
         public int Id { get; set; }
 
