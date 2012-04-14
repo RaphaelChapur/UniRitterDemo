@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+      <HintPath>..\packages\Ninject.3.0.0.15\lib\net40\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Seterlund.CodeGuard, Version=2.1.4355.1013, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Seterlund.CodeGuard.2.1\lib\net40\Seterlund.CodeGuard.dll</HintPath>
@@ -51,9 +51,10 @@
     <Compile Include="BLModule.cs" />
     <Compile Include="BusinessObject.cs" />
     <Compile Include="IBusinessObject.cs" />
+    <Compile Include="ILookupHelper.cs" />
     <Compile Include="LivroBO.cs" />
+    <Compile Include="LookupHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TEntidade.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniRitter.Demo.DataAccessLogic\UniRitter.Demo.DataAccessLogic.csproj">
@@ -69,6 +70,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

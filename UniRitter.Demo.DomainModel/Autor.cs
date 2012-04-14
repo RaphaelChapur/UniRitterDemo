@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace UniRitter.Demo.DomainModel
+﻿namespace UniRitter.Demo.DomainModel
 {
+    using System.ComponentModel.DataAnnotations;
+
     [Table("Autor")]
     public class Autor : IEntidade
     {
@@ -8,7 +9,7 @@ namespace UniRitter.Demo.DomainModel
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength=2)]
+        [StringLength(50, MinimumLength = 1)]
         public string Nome { get; set; }
     }
 }

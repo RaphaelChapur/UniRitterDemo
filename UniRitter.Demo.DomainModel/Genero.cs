@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-
-namespace UniRitter.Demo.DomainModel
+﻿namespace UniRitter.Demo.DomainModel
 {
+    using System.ComponentModel.DataAnnotations;
+
     [Table("Genero")]
     public class Genero : IEntidade
     {
-        [Key]
         [Column("GeneroId")]
         public int Id { get; set; }
 
         [Required]
-        [StringLength(40, MinimumLength=4)]
+        [StringLength(40, MinimumLength = 1)]
         public string Nome { get; set; }
     }
 }

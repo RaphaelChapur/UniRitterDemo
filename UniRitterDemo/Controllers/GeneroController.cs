@@ -3,122 +3,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Moo;
 using UniRitter.Demo.DomainModel;
 using UniRitter.Demo.BusinessLogic;
-using Moo;
 using UniRitterDemo.Models;
 
 namespace UniRitterDemo.Controllers
 {
     public class GeneroController : Controller
     {
-        public IBusinessObject<Genero> BO { get; set; }
+        public IBusinessObject<Genero> BO { get; private set; }
 
-        public IMappingRepository MappingRepo { get; set; }
+        public IMapper<Genero, GeneroModel> Mapper { get; private set; }
 
-        public GeneroController(IBusinessObject<Genero> bo, IMappingRepository mappingRepo)
+        public IMapper<GeneroModel, Genero> ModelMapper { get; private set; }
+
+        public GeneroController(
+            IBusinessObject<Genero> bo,
+            IMapper<Genero, GeneroModel> mapper,
+            IMapper<GeneroModel, Genero> modelMapper)
         {
-            this.BO = bo;
-            this.MappingRepo = mappingRepo;
+            BO = bo;
+            Mapper = mapper;
+            ModelMapper = modelMapper;
         }
-    
+
+        //
         // GET: /Genero/
 
         public ActionResult Index()
         {
             var entidades = BO.BuscarTodos();
-            var mapper = MappingRepo.ResolveMapper<Genero, GeneroIndexModel>();
-            var models = mapper.MapMultiple(entidades);
+            var models = Mapper.MapMultiple(entidades);
             return View(models);
         }
 
-        //
-        // GET: /Genero/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Genero/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        } 
-
-        //
-        // POST: /Genero/Create
-
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        
-        //
-        // GET: /Genero/Edit/5
- 
-        public ActionResult Edit(int id)
+        private ActionResult MostrarDetalhes(int id)
         {
             var entidade = BO.BuscarPorId(id);
-            var mapper = MappingRepo.ResolveMapper<Genero, GeneroEditModel>();
-            var model = mapper.Map(entidade);
+            var model = Mapper.Map(entidade);
             return View(model);
         }
 
-        //
-        // POST: /Genero/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Genero/Delete/5
- 
         public ActionResult Delete(int id)
         {
-            return View();
+            return MostrarDetalhes(id);
         }
 
-        //
-        // POST: /Genero/Delete/5
+        public ActionResult Delete(GeneroModel model)
+        {
+            var entidade = ModelMapper.Map(model);
+            BO.Remover(entidade);
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Create(GeneroModel model)
         {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            //var mapper = MappingRepo.ResolveMapper<GeneroModel, Genero>();
+            //var entidade = mapper.Map(model);
+            //BO.Inserir(entidade);
+            return RedirectToAction("Index");
         }
+
     }
 }
