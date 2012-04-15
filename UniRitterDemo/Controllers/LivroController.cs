@@ -72,6 +72,16 @@
             return this.View();
         }
 
+        public ActionResult Details(int id)
+        {
+            return MostrarModel<LivroDetailsModel>(id);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return MostrarModel<LivroDeleteModel>(id);
+        }
+
         [HttpPost]
         public ActionResult Create(LivroEditModel model)
         {
@@ -81,6 +91,23 @@
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Edit(LivroEditModel model)
+        {
+            var mapper = MappingRepo.ResolveMapper<LivroEditModel, Livro>();
+            var entidade = mapper.Map(model);
+            BO.Atualizar(entidade);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(LivroDeleteModel model)
+        {
+            var mapper = MappingRepo.ResolveMapper<LivroDeleteModel, Livro>();
+            var entidade = mapper.Map(model);
+            BO.Remover(entidade);
+            return RedirectToAction("Index");
+        }  
 
         public ActionResult BuscarAutor(String term)
         {

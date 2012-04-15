@@ -1,0 +1,45 @@
+﻿@model UniRitterDemo.Models.LivroDetailsModel
+
+@{
+    ViewBag.Title = "ViewPage1";
+}
+
+<h2>ViewPage1</h2>
+
+<fieldset>
+    <legend>LivroDetailsModel</legend>
+
+    <div class="display-label">Nome</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">Fonte</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Fonte)
+    </div>
+
+    <div class="display-label">AnoPublicacao</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AnoPublicacao)
+    </div>
+
+    <div class="display-label">Editora</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Editora)
+    </div>
+
+    <div class="display-label">AutorNome</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AutorNome)
+    </div>
+
+    <div class="display-label">GeneroNome</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GeneroNome)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

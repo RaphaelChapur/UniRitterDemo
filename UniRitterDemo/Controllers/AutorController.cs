@@ -45,9 +45,40 @@ namespace UniRitterDemo.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            return this.View();
+        }
+
+        public ActionResult Details(int id)
+        {
+            return MostrarDetalhes(id);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return MostrarDetalhes(id);
+        }
+
         public ActionResult Delete(int id)
         {
             return MostrarDetalhes(id);
+        }
+
+        [HttpPost]
+        public ActionResult Create(AutorModel model)
+        {
+            var entidade = ModelMapper.Map(model);
+            BO.Inserir(entidade);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(AutorModel model)
+        {
+            var entidade = ModelMapper.Map(model);
+            BO.Atualizar(entidade);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

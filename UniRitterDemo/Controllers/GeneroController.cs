@@ -45,26 +45,49 @@ namespace UniRitterDemo.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            return this.View();
+        }
+
+        public ActionResult Details(int id)
+        {
+            return MostrarDetalhes(id);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return MostrarDetalhes(id);
+        }
+
         public ActionResult Delete(int id)
         {
             return MostrarDetalhes(id);
         }
 
+        [HttpPost]
+        public ActionResult Create(GeneroModel model)
+        {
+            var entidade = ModelMapper.Map(model);
+            BO.Inserir(entidade);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(GeneroModel model)
+        {
+            var entidade = ModelMapper.Map(model);
+            BO.Atualizar(entidade);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public ActionResult Delete(GeneroModel model)
         {
             var entidade = ModelMapper.Map(model);
             BO.Remover(entidade);
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Create(GeneroModel model)
-        {
-            //var mapper = MappingRepo.ResolveMapper<GeneroModel, Genero>();
-            //var entidade = mapper.Map(model);
-            //BO.Inserir(entidade);
-            return RedirectToAction("Index");
-        }
+        }  
 
     }
 }
